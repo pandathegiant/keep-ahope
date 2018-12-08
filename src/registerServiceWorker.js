@@ -11,6 +11,16 @@
 export default function register() {
     if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
       window.addEventListener('load', () => {
+        navigator.serviceWorker
+          .register('/dummy.js', {scope : '/parse'})
+          .catch(error => {
+            console.error('Error during dummy service worker registration for /parse scope:', error);
+          });
+          navigator.serviceWorker
+          .register('/dummy.js', {scope : '/dashboard'})
+          .catch(error => {
+            console.error('Error during dummy service worker registration for /dashboard scope:', error);
+          });
         const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
         navigator.serviceWorker
           .register(swUrl)
